@@ -1,0 +1,227 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Centos安装telnet服务 | haydenzhou小木屋</title><meta name="keywords" content="linux,网络技术"><meta name="author" content="haydenzhou,zhou_kexin(@).foxmail.com**(@)替换为@**"><meta name="copyright" content="haydenzhou"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本文纯属个人观点，喜欢的欢迎交流不喜欢的望放过！在此谢过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Centos安装telnet服务">
+<meta property="og:url" content="https://haydenzhou.github.io/2021/08/31/centosinstalltelnetserver/index.html">
+<meta property="og:site_name" content="haydenzhou小木屋">
+<meta property="og:description" content="本文纯属个人观点，喜欢的欢迎交流不喜欢的望放过！在此谢过">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://haydenzhou.github.io/img/default_cover.png">
+<meta property="article:published_time" content="2021-08-31T13:52:32.000Z">
+<meta property="article:modified_time" content="2021-09-01T08:07:36.769Z">
+<meta property="article:author" content="haydenzhou">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="网络技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://haydenzhou.github.io/img/default_cover.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://haydenzhou.github.io/2021/08/31/centosinstalltelnetserver/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Centos安装telnet服务',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-09-01 16:07:36'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/self-ava.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">28</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div></div></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/default_cover.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">haydenzhou小木屋</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Centos安装telnet服务</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-08-31T13:52:32.000Z" title="发表于 2021-08-31 21:52:32">2021-08-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-09-01T08:07:36.769Z" title="更新于 2021-09-01 16:07:36">2021-09-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/linux/">linux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Centos安装telnet服务"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在服务器内网进行openssh升级的过程中，需要进行私有源或者本地源的安装配置，前面文章<a href="/2021/08/30/centosaddISOrepo/">Centos配置本地镜像源</a>已经通过系统镜像完成了本地源的安装配置，本篇文章将介绍说明如何安装、配置telnet-server,来建立与服务端的备份通讯，保证在ssh连接出现中断或者服务停止的情况下，通过telnet连接到服务器进行进一步的操作，安全完成openssh的升级工作。</p>
+<h1 id="服务安装配置"><a href="#服务安装配置" class="headerlink" title="服务安装配置"></a>服务安装配置</h1><h2 id="telnet安装"><a href="#telnet安装" class="headerlink" title="telnet安装"></a>telnet安装</h2><p>因为telnet依赖xinetd，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/xinetd/9085703?fr=aladdin">xinetd</a>会自动被安装。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y telnet-server</span><br></pre></td></tr></table></figure>
+
+<h2 id="telnet配置"><a href="#telnet配置" class="headerlink" title="telnet配置"></a>telnet配置</h2><ul>
+<li><p>如果/etc/xinetd.d/telnet文件存在</p>
+<p>修改文件中：disable = yes改成disable = no</p>
+</li>
+<li><p>如果/etc/xinetd.d/telnet文件不存在</p>
+<p>新增配置文件，并设置内容如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">service telnet</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">#disable = yes</span></span><br><span class="line">    <span class="built_in">disable</span> = no</span><br><span class="line">    flags = REUSE</span><br><span class="line">    socket_type = stream</span><br><span class="line">    <span class="built_in">wait</span> = no</span><br><span class="line">    user = root</span><br><span class="line">    server = /usr/sbin/in.telnetd</span><br><span class="line">    log_on_failure += USERID</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="telnet启动"><a href="#telnet启动" class="headerlink" title="telnet启动"></a>telnet启动</h2><ul>
+<li><p>redhat6、entos6版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">启动服务</span></span><br><span class="line">service xinetd start</span><br><span class="line"><span class="meta">#</span><span class="bash">配置开机启动</span></span><br><span class="line">chkconfig --add xinetd</span><br></pre></td></tr></table></figure></li>
+<li><p>redhat7、entos7及以上版本</p>
+<p>启动xinetd守护进程</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable xinetd --now</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="配置root用户登录"><a href="#配置root用户登录" class="headerlink" title="配置root用户登录"></a>配置root用户登录</h2><p>系统默认不允许root用户通过telnet登录，进行相关调整即可。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv /etc/securetty /etc/securetty.bak</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="开放telnet端口"><a href="#开放telnet端口" class="headerlink" title="开放telnet端口"></a>开放telnet端口</h2><h3 id="iptables开放端口"><a href="#iptables开放端口" class="headerlink" title="iptables开放端口"></a>iptables开放端口</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -p tcp --dport  23 -j ACCEPT <span class="comment">#开放端口</span></span><br><span class="line">iptables save <span class="comment">#保存配置</span></span><br><span class="line">iptables restart <span class="comment">#重启服务</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="firewall开放端口"><a href="#firewall开放端口" class="headerlink" title="firewall开放端口"></a>firewall开放端口</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent --add-port=23/tcp --zone=public</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="服务连接登陆验证"><a href="#服务连接登陆验证" class="headerlink" title="服务连接登陆验证"></a>服务连接登陆验证</h1><h2 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#示例：telnet ip port</span></span><br><span class="line">[root@localhost ~]<span class="comment"># telnet 10.60.7.81 23</span></span><br><span class="line">Trying 10.60.7.81...</span><br><span class="line">Connected to 10.60.7.81.</span><br><span class="line">Escape character is <span class="string">&#x27;^]&#x27;</span>.</span><br><span class="line">Red Hat Enterprise Linux Server release 6.9 (Santiago)</span><br><span class="line">Kernel 2.6.32-696.el6.x86_64 on an x86_64</span><br><span class="line">localhost.localdomain login: </span><br></pre></td></tr></table></figure>
+
+<h2 id="telnet登录慢情况"><a href="#telnet登录慢情况" class="headerlink" title="telnet登录慢情况"></a>telnet登录慢情况</h2><p>如果敲完telnet命令后，反应很慢，要等待很久才提示输入用户名和密码，<br>则可以编辑 /etc/resolv.conf 文件，将nameserver注释掉，<br>或在前面增加: nameserver 127.0.0.1 或 nameserver &lt;本机IP&gt;</p>
+<p>编辑完成，执行：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/resolv.conf </span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="服务的关闭"><a href="#服务的关闭" class="headerlink" title="服务的关闭"></a>服务的关闭</h1><ul>
+<li><p>redhat6、entos6版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">关闭服务</span></span><br><span class="line">service xinetd start</span><br><span class="line"><span class="meta">#</span><span class="bash">关闭开启自启</span></span><br><span class="line">chkconfig --del xinetd</span><br></pre></td></tr></table></figure></li>
+<li><p>redhat7、entos7及以上版本</p>
+<p>关闭xinetd守护进程</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl disable xinetd.service --now</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="相关引用以及参照"><a href="#相关引用以及参照" class="headerlink" title="相关引用以及参照"></a>相关引用以及参照</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaoai666/p/14802331.html">CentOS 7 自带版本OpenSSH 7.4p1到OpenSSH 8.6p1教程</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41355314/article/details/116495837">centos7升级OpenSSH 至最新 OpenSSH_8.6版本（2021.05.08）</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.linuxidc.com/Linux/2012-10/71698.htm">RHEL 6中telnet服务的安装及配置</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:zhou_kexin(@).foxmail.com**(@)替换为@**">haydenzhou</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://haydenzhou.github.io/2021/08/31/centosinstalltelnetserver/">https://haydenzhou.github.io/2021/08/31/centosinstalltelnetserver/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://haydenzhou.github.io" target="_blank">haydenzhou小木屋</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/linux/">linux</a><a class="post-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/">网络技术</a></div><div class="post_share"><div class="social-share" data-image="/img/default_cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/09/01/redhat-centosupdateopensshto8-6/"><img class="prev-cover" src="/img/default_cover.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Redhat6.9、Cent6 升级openssh 7.4to8.6</div></div></a></div><div class="next-post pull-right"><a href="/2021/08/30/centosaddISOrepo/"><img class="next-cover" src="/img/default_cover.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Centos配置本地镜像源</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/06/16/linux-nameserver设置错误导致网络超时/" title="linux-nameserver设置错误导致网络超时"><img class="cover" src="/img/default_cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-16</div><div class="title">linux-nameserver设置错误导致网络超时</div></div></a></div><div><a href="/2021/09/01/redhat-centosupdateopensshto8-6/" title="Redhat6.9、Cent6 升级openssh 7.4to8.6"><img class="cover" src="/img/default_cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-01</div><div class="title">Redhat6.9、Cent6 升级openssh 7.4to8.6</div></div></a></div><div><a href="/2021/08/30/centosaddISOrepo/" title="Centos配置本地镜像源"><img class="cover" src="/img/default_cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-30</div><div class="title">Centos配置本地镜像源</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">服务安装配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#telnet%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.</span> <span class="toc-text">telnet安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#telnet%E9%85%8D%E7%BD%AE"><span class="toc-number">2.2.</span> <span class="toc-text">telnet配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#telnet%E5%90%AF%E5%8A%A8"><span class="toc-number">2.3.</span> <span class="toc-text">telnet启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEroot%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95"><span class="toc-number">2.4.</span> <span class="toc-text">配置root用户登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E6%94%BEtelnet%E7%AB%AF%E5%8F%A3"><span class="toc-number">2.5.</span> <span class="toc-text">开放telnet端口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#iptables%E5%BC%80%E6%94%BE%E7%AB%AF%E5%8F%A3"><span class="toc-number">2.5.1.</span> <span class="toc-text">iptables开放端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#firewall%E5%BC%80%E6%94%BE%E7%AB%AF%E5%8F%A3"><span class="toc-number">2.5.2.</span> <span class="toc-text">firewall开放端口</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E8%BF%9E%E6%8E%A5%E7%99%BB%E9%99%86%E9%AA%8C%E8%AF%81"><span class="toc-number">3.</span> <span class="toc-text">服务连接登陆验证</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E8%BF%9E%E6%8E%A5"><span class="toc-number">3.1.</span> <span class="toc-text">测试连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#telnet%E7%99%BB%E5%BD%95%E6%85%A2%E6%83%85%E5%86%B5"><span class="toc-number">3.2.</span> <span class="toc-text">telnet登录慢情况</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%85%B3%E9%97%AD"><span class="toc-number">4.</span> <span class="toc-text">服务的关闭</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E5%BC%95%E7%94%A8%E4%BB%A5%E5%8F%8A%E5%8F%82%E7%85%A7"><span class="toc-number">5.</span> <span class="toc-text">相关引用以及参照</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By haydenzhou</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '9Qnx0L7F76ALfhq9ezEflj5u-gzGzoHsz',
+      appKey: 'xN8vqXaKifkS6M0eTSmj7wws',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
